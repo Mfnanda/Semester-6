@@ -24,6 +24,7 @@
     
     <div class="menu">
         <a href="index.php?menu=profil">Profil</a>
+        <a href="index.php?menu=visimisi">Visi Misi</a>
         <a href="index.php?menu=koleksi">Koleksi Buku</a>
         <a href="index.php?menu=pinjam">Peminjaman</a>
         <a href="index.php?menu=bukutamu">Tinggalkan Pesan</a>
@@ -34,6 +35,8 @@
 
     if ($menu == 'profil') {
         include 'profil.php';
+    } elseif ($menu == 'visimisi') {
+        include 'visimisi.php';
     } elseif ($menu == 'koleksi') {
         include 'koleksi.php';
     } elseif ($menu == 'pinjam') {
