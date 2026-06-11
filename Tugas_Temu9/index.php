@@ -3,48 +3,46 @@
 <head>
     <title>Sistem Perpustakaan</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background-color: #f5f5f5; }
+        body { font-family: Arial, sans-serif; background-color: white; margin: 0; padding: 0; }
         
-        /* Navigation Bar */
-        header { background-color: #2c3e50; padding: 0; position: sticky; top: 0; z-index: 100; }
-        .navbar { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
-        .logo { color: white; font-size: 24px; font-weight: bold; }
-        .menu { display: flex; gap: 30px; flex-wrap: wrap; }
-        .menu a { color: white; text-decoration: none; font-size: 14px; transition: color 0.3s; }
-        .menu a:hover { color: #3498db; }
+        /* Header & Navigation */
+        header { background-color: #333; padding: 0; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; max-width: 1200px; margin: 0 auto; }
+        .logo { color: white; font-size: 20px; font-weight: bold; }
+        .menu { display: flex; gap: 20px; }
+        .menu a { color: white; text-decoration: none; padding: 10px 15px; }
+        .menu a:hover { background-color: #555; }
         
-        /* Landing Page Hero */
-        .hero { background-color: #34495e; color: white; padding: 80px 20px; text-align: center; }
-        .hero h1 { font-size: 42px; margin-bottom: 15px; }
-        .hero p { font-size: 18px; max-width: 600px; margin: 0 auto 30px; }
-        .btn-primary { display: inline-block; background-color: #3498db; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; transition: background-color 0.3s; }
-        .btn-primary:hover { background-color: #2980b9; }
+        /* Hero Section */
+        .hero { background-color: #666; color: white; padding: 60px 20px; text-align: center; }
+        .hero h1 { font-size: 32px; margin-bottom: 15px; }
+        .hero p { font-size: 16px; margin-bottom: 20px; }
+        .btn-primary { background-color: #333; color: white; padding: 10px 20px; text-decoration: none; }
+        .btn-primary:hover { background-color: #555; }
         
-        /* Content Container */
-        .container { max-width: 1000px; margin: 40px auto; padding: 20px; background: white; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h2 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; margin-bottom: 20px; }
-        h3 { color: #34495e; margin: 20px 0 10px; }
-        p { line-height: 1.6; color: #555; margin-bottom: 15px; }
+        /* Container */
+        .container { max-width: 1000px; margin: 20px auto; padding: 20px; background: white; }
+        h2, h3 { color: #333; }
+        h2 { border-bottom: 1px solid #ccc; padding-bottom: 10px; }
+        p { line-height: 1.6; color: #333; }
         
-        /* Features/Cards */
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0; }
-        .feature-card { background: #ecf0f1; padding: 20px; border-radius: 5px; text-align: center; }
-        .feature-card h4 { color: #2c3e50; margin-bottom: 10px; }
+        /* Feature Cards */
+        .features { margin: 20px 0; }
+        .feature-card { background: #f9f9f9; padding: 15px; margin: 10px 0; border: 1px solid #ddd; }
+        .feature-card h4 { color: #333; }
         
         /* Forms & Tables */
-        input[type="text"], input[type="date"], textarea { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #bdc3c7; border-radius: 4px; font-family: Arial; }
-        textarea { resize: vertical; min-height: 100px; }
-        input[type="submit"] { background-color: #3498db; color: white; padding: 12px 30px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background-color 0.3s; margin-top: 10px; }
-        input[type="submit"]:hover { background-color: #2980b9; }
+        input[type="text"], input[type="date"], textarea { width: 100%; padding: 8px; margin: 8px 0; border: 1px solid #999; }
+        input[type="submit"] { background-color: #333; color: white; padding: 10px 15px; border: none; cursor: pointer; margin-top: 10px; }
+        input[type="submit"]:hover { background-color: #555; }
         
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        th, td { border: 1px solid #bdc3c7; padding: 12px; text-align: left; }
-        th { background-color: #34495e; color: white; }
-        tr:nth-child(even) { background-color: #ecf0f1; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #999; padding: 10px; text-align: left; }
+        th { background-color: #f0f0f0; }
         
         /* Footer */
-        footer { background-color: #2c3e50; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+        footer { background-color: #333; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+        footer p { color: white; margin: 0; font-size: 14px; }
     </style>
 </head>
 <body>
