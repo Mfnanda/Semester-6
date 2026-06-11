@@ -24,7 +24,7 @@
     } elseif ($menu == 'visimisi') {
         include 'visimisi.php';
     } elseif ($menu == 'kontak') {
-        require 'kontak.php'; // Menggunakan require agar ada variasi sesuai soal
+        require 'kontak.php'; 
     } elseif ($menu == 'bukutamu') {
         include 'bukutamu.php';
     } else {
