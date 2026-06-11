@@ -7,7 +7,6 @@ if (isset($_POST['pinjam'])) {
     $buku = $_POST['judul_buku'];
     $tanggal = $_POST['tanggal_pinjam'];
 
-    // Memasukkan data ke tabel peminjaman
     $simpan = mysqli_query($koneksi, "INSERT INTO peminjaman (nama_peminjam, judul_buku, tanggal_pinjam) VALUES ('$nama', '$buku', '$tanggal')");
 
     if ($simpan) {

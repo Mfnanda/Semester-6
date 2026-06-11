@@ -9,12 +9,11 @@
         <th>Tahun Terbit</th>
     </tr>
     <?php
-    require 'koneksi.php'; // Memanggil file koneksi
+    require 'koneksi.php';
     /** @var mysqli $koneksi */
     $query = mysqli_query($koneksi, "SELECT * FROM buku");
     $no = 1;
     
-    // Perulangan (looping) untuk menampilkan data
     while ($data = mysqli_fetch_array($query)) {
         echo "<tr>";
         echo "<td>" . $no++ . "</td>";
