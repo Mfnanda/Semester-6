@@ -1,5 +1,5 @@
 <?php
-$host = "localhost";
+$host = "127.0.0.1";
 $user = "root";       
 $pass = "";           
 $db   = "db_perpustakaan";
@@ -7,6 +7,6 @@ $db   = "db_perpustakaan";
 $koneksi = mysqli_connect($host, $user, $pass, $db);
 
 if (!$koneksi) {
-    die("Koneksi ke database gagal: " . mysqli_connect_error());
+    die("Koneksi ke database gagal: " . mysqli_connect_error() . ". Pastikan layanan MySQL/XAMPP sudah dijalankan.");
 }
 ?>
