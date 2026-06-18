@@ -3,40 +3,40 @@
 <head>
     <title>Sistem Perpustakaan</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: white; margin: 0; padding: 0; }
+        body { font-family: Verdana, Geneva, sans-serif; background-color: #fff; color: #111; margin: 0; padding: 0; }
         
-        header { background-color: #333; padding: 0; }
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; max-width: 1200px; margin: 0 auto; }
-        .logo { color: white; font-size: 20px; font-weight: bold; }
-        .menu { display: flex; gap: 20px; }
-        .menu a { color: white; text-decoration: none; padding: 10px 15px; }
-        .menu a:hover { background-color: #555; }
+        header { background-color: #eee; padding: 10px 0; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 20px; max-width: 1000px; margin: 0 auto; }
+        .logo { color: #111; font-size: 18px; font-weight: normal; }
+        .menu { display: flex; gap: 12px; }
+        .menu a { color: #111; text-decoration: none; padding: 5px 8px; }
+        .menu a:hover { text-decoration: underline; }
         
-        .hero { background-color: #666; color: white; padding: 60px 20px; text-align: center; }
-        .hero h1 { font-size: 32px; margin-bottom: 15px; }
-        .hero p { font-size: 16px; margin-bottom: 20px; }
-        .btn-primary { background-color: #333; color: white; padding: 10px 20px; text-decoration: none; }
-        .btn-primary:hover { background-color: #555; }
+        .hero { background-color: transparent; color: #111; padding: 40px 20px 20px; text-align: left; }
+        .hero h1 { font-size: 26px; margin: 0 0 10px; }
+        .hero p { font-size: 14px; margin: 0 0 12px; }
+        .btn-primary { color: #111; text-decoration: underline; }
         
-        .container { max-width: 1000px; margin: 20px auto; padding: 20px; background: white; }
-        h2, h3 { color: #333; }
-        h2 { border-bottom: 1px solid #ccc; padding-bottom: 10px; }
-        p { line-height: 1.6; color: #333; }
+        .container { max-width: 900px; margin: 0 auto 20px; padding: 20px; }
+        h2, h3 { color: #111; }
+        h2 { border-bottom: 1px solid #ccc; padding-bottom: 8px; margin-top: 20px; }
+        p { line-height: 1.5; color: #333; }
         
         .features { margin: 20px 0; }
-        .feature-card { background: #f9f9f9; padding: 15px; margin: 10px 0; border: 1px solid #ddd; }
-        .feature-card h4 { color: #333; }
+        .feature-card { padding: 12px 0; margin: 8px 0; border-top: 1px solid #ddd; }
+        .feature-card:last-child { border-bottom: 1px solid #ddd; }
+        .feature-card h4 { margin: 0 0 4px; font-size: 16px; }
         
-        input[type="text"], input[type="date"], textarea { width: 100%; padding: 8px; margin: 8px 0; border: 1px solid #999; }
-        input[type="submit"] { background-color: #333; color: white; padding: 10px 15px; border: none; cursor: pointer; margin-top: 10px; }
-        input[type="submit"]:hover { background-color: #555; }
+        input[type="text"], input[type="date"], textarea { width: 100%; padding: 8px; margin: 8px 0; border: 1px solid #ccc; background: #fff; }
+        input[type="submit"] { background-color: #111; color: white; padding: 8px 12px; border: none; cursor: pointer; margin-top: 10px; }
+        input[type="submit"]:hover { background-color: #333; }
         
         table { width: 100%; border-collapse: collapse; margin: 15px 0; }
-        th, td { border: 1px solid #999; padding: 10px; text-align: left; }
-        th { background-color: #f0f0f0; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f7f7f7; }
 
-        footer { background-color: #333; color: white; text-align: center; padding: 20px; margin-top: 40px; }
-        footer p { color: white; margin: 0; font-size: 14px; }
+        footer { background-color: #f4f4f4; color: #111; text-align: center; padding: 15px 20px; margin-top: 20px; }
+        footer p { margin: 0; font-size: 13px; }
     </style>
 </head>
 <body>
