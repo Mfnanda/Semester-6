@@ -2,7 +2,14 @@
 <p>Berikut adalah buku yang tersedia di perpustakaan kami:</p>
 
 <div style="margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
-    <a href="index.php?menu=tambah_buku" style="display: inline-block; padding: 8px 12px; background-color: #111; color: #fff; text-decoration: none;">+ Tambah Buku</a>
+    
+    <?php 
+    // Tombol Tambah HANYA muncul untuk Admin
+    if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'): 
+    ?>
+        <a href="index.php?menu=tambah_buku" style="display: inline-block; padding: 8px 12px; background-color: #111; color: #fff; text-decoration: none;">+ Tambah Buku</a>
+    <?php else: ?>
+        <div></div> <?php endif; ?>
     
     <form action="index.php" method="GET" style="margin: 0; display: flex; gap: 5px;">
         <input type="hidden" name="menu" value="koleksi">
@@ -20,19 +27,23 @@
         <th>Judul Buku</th>
         <th>Pengarang</th>
         <th>Tahun Terbit</th>
-        <th>Aksi</th>
+        
+        <?php 
+        // Header Aksi HANYA muncul untuk Admin
+        if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'): 
+        ?>
+            <th>Aksi</th>
+        <?php endif; ?>
     </tr>
+    
     <?php
     require 'config/koneksi.php';
     /** @var mysqli $koneksi */
     
-    // Logika Pencarian
     if (isset($_GET['cari']) && $_GET['cari'] != '') {
         $cari = $_GET['cari'];
-        // Menggunakan LIKE '%kata%' untuk mencari data yang mengandung kata tersebut
         $query = mysqli_query($koneksi, "SELECT * FROM buku WHERE judul LIKE '%$cari%' OR pengarang LIKE '%$cari%'");
     } else {
-        // Jika tidak ada pencarian, tampilkan semua data
         $query = mysqli_query($koneksi, "SELECT * FROM buku");
     }
     
@@ -43,14 +54,17 @@
         echo "<td>" . $data['judul'] . "</td>";
         echo "<td>" . $data['pengarang'] . "</td>";
         echo "<td>" . $data['tahun'] . "</td>";
-        echo "<td>
-                <a href='index.php?menu=edit_buku&id=" . $data['id'] . "' style='color: blue;'>Edit</a> | 
-                <a href='hapus_buku.php?id=" . $data['id'] . "' style='color: red;' onclick='return confirm(\"Apakah Anda yakin ingin menghapus buku ini?\")'>Hapus</a>
-              </td>";
+        
+        // Tombol Edit & Hapus HANYA muncul untuk Admin
+        if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+            echo "<td>
+                    <a href='index.php?menu=edit_buku&id=" . $data['id'] . "' style='color: blue;'>Edit</a> | 
+                    <a href='hapus_buku.php?id=" . $data['id'] . "' style='color: red;' onclick='return confirm(\"Apakah Anda yakin ingin menghapus buku ini?\")'>Hapus</a>
+                  </td>";
+        }
         echo "</tr>";
     }
     
-    // Jika data tidak ditemukan
     if (mysqli_num_rows($query) == 0) {
         echo "<tr><td colspan='5' style='text-align: center;'>Data buku tidak ditemukan.</td></tr>";
     }
