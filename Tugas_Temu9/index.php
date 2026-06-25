@@ -94,6 +94,8 @@ if ($menu == '') {
     include 'bukutamu.php';
 } elseif ($menu == 'tambah_buku') {
     include 'tambah_buku.php';
+} elseif ($menu == 'edit_buku') {
+    include 'edit_buku.php';
 }
 ?>
 
