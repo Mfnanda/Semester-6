@@ -2,7 +2,7 @@
 <p>Silakan ubah informasi buku di bawah ini.</p>
 
 <?php
-require 'koneksi.php';
+require 'config/koneksi.php';
 /** @var mysqli $koneksi */
 
 // 1. TAHAP AMBIL DATA LAMA

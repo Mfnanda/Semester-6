@@ -2,7 +2,7 @@
 <p>Silakan masukkan detail buku yang ingin ditambahkan ke perpustakaan.</p>
 
 <?php
-require 'koneksi.php';
+require 'config/koneksi.php';
 /** @var mysqli $koneksi */
 
 if (isset($_POST['simpan_buku'])) {

@@ -23,7 +23,7 @@
         <th>Aksi</th>
     </tr>
     <?php
-    require 'koneksi.php';
+    require 'config/koneksi.php';
     /** @var mysqli $koneksi */
     
     // Logika Pencarian

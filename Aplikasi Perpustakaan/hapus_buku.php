@@ -1,6 +1,6 @@
 <?php
 // Memanggil koneksi database
-require 'koneksi.php';
+require 'config/koneksi.php';
 /** @var mysqli $koneksi */
 
 // Mengecek apakah ada parameter 'id' yang dikirimkan melalui URL
