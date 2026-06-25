@@ -1,6 +1,7 @@
 <?php
 // Memanggil koneksi database
 require 'koneksi.php';
+/** @var mysqli $koneksi */
 
 // Mengecek apakah ada parameter 'id' yang dikirimkan melalui URL
 if (isset($_GET['id'])) {
@@ -10,7 +11,7 @@ if (isset($_GET['id'])) {
     // Query untuk menghapus data dari tabel buku berdasarkan ID
     $query = "DELETE FROM buku WHERE id = '$id'";
     $hapus = mysqli_query($koneksi, $query);
-
+    
     // Cek apakah query berhasil dijalankan
     if ($hapus) {
         echo "<script>
