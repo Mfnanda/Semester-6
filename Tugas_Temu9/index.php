@@ -92,6 +92,8 @@ if ($menu == '') {
     include 'pinjam.php';
 } elseif ($menu == 'kontak') {
     include 'bukutamu.php';
+} elseif ($menu == 'tambah_buku') {
+    include 'tambah_buku.php';
 }
 ?>
 
