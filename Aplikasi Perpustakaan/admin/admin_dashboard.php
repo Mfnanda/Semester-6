@@ -27,6 +27,14 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
                 <br><small style="color: #666; margin-left: 25px;">(Tambah, Edit, dan Hapus Buku)</small>
             </li>
             <li>
+                ✉️ <a href="lihat_buku.php" style="text-decoration: none; color: blue; font-weight: bold;">Lihat Buku Tamu</a>
+                <br><small style="color: #666; margin-left: 25px;">(Baca dan hapus pesan dari pengunjung)</small>
+            </li>
+            <li>
+                👥 <a href="kelola_user.php" style="text-decoration: none; color: blue; font-weight: bold;">Kelola Pengguna</a>
+                <br><small style="color: #666; margin-left: 25px;">(Tambah dan hapus akun Admin/User)</small>
+            </li>
+            <li>
                 🏠 <a href="../index.php" style="text-decoration: none; color: blue; font-weight: bold;">Lihat Halaman Publik</a>
                 <br><small style="color: #666; margin-left: 25px;">(Kembali ke tampilan pengunjung utama)</small>
             </li>
