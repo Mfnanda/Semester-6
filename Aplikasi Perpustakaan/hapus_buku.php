@@ -1,4 +1,12 @@
 <?php
+// Wajib panggil session_start() karena file ini diakses langsung tanpa lewat index.php
+session_start();
+
+// Proteksi Keamanan: Tolak jika yang akses bukan admin
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    die("<script>alert('Akses Ditolak! Anda bukan admin.'); window.location.href='index.php?menu=koleksi';</script>");
+}
+
 // Memanggil koneksi database
 require 'config/koneksi.php';
 /** @var mysqli $koneksi */
