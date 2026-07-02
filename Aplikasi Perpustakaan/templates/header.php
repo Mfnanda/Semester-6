@@ -14,7 +14,7 @@
             <a href="index.php?menu=visimisi">Visi Misi</a>
             <a href="index.php?menu=koleksi">Koleksi Buku</a>
             <a href="index.php?menu=pinjam">Peminjaman</a>
-            <a href="index.php?menu=kontak">Kontak</a>
+            <a href="index.php?menu=kontak">Contact</a>
             
             <?php 
             // Jika pengguna SUDAH LOGIN (Sesi Role sudah terbentuk)
