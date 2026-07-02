@@ -10,15 +10,6 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
 require '../config/koneksi.php';
 /** @var mysqli $koneksi */
 
-// FITUR HAPUS PESAN BUKU TAMU
-if (isset($_GET['hapus_pesan'])) {
-    $id_pesan = $_GET['hapus_pesan'];
-    $query_hapus = mysqli_query($koneksi, "DELETE FROM pesan_pengunjung WHERE id = '$id_pesan'");
-    if ($query_hapus) {
-        echo "<script>alert('Pesan berhasil dihapus!'); window.location.href='lihat_buku.php';</script>";
-    }
-}
-
 // FITUR HAPUS CATATAN PEMINJAMAN
 if (isset($_GET['hapus_pinjam'])) {
     $id_pinjam = $_GET['hapus_pinjam'];
@@ -32,14 +23,15 @@ if (isset($_GET['hapus_pinjam'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laporan & Buku Tamu</title>
+    <title>Laporan Peminjaman</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body style="padding: 20px; max-width: 1000px; margin: 0 auto;">
     
-    <h2>📊 Panel Laporan Perpustakaan</h2>
+    <h2>📊 Panel Laporan Peminjaman</h2>
     <a href="admin_dashboard.php" style="display: inline-block; margin-bottom: 30px; text-decoration: none; color: #d9534f; font-weight: bold;">&larr; Kembali ke Dashboard</a>
 
+    <!-- TABEL: DAFTAR PEMINJAMAN BUKU -->
     <h3 style="border-bottom: 2px solid #111; padding-bottom: 5px;">📖 Daftar Peminjaman Buku Aktif</h3>
     <table style="margin-bottom: 40px;">
         <tr>
@@ -71,38 +63,6 @@ if (isset($_GET['hapus_pinjam'])) {
         
         if (mysqli_num_rows($query_pinjam) == 0) {
             echo "<tr><td colspan='7' style='text-align: center;'>Belum ada data peminjaman buku.</td></tr>";
-        }
-        ?>
-    </table>
-
-
-    <h3 style="border-bottom: 2px solid #111; padding-bottom: 5px;">✉️ Daftar Pesan Pengunjung (Buku Tamu)</h3>
-    <table>
-        <tr>
-            <th>No</th>
-            <th>Nama Pengirim</th>
-            <th>Instansi/Kampus</th>
-            <th>Isi Pesan</th>
-            <th>Aksi</th>
-        </tr>
-        <?php
-        $query_pesan = mysqli_query($koneksi, "SELECT * FROM pesan_pengunjung ORDER BY id DESC");
-        $no_b = 1;
-        
-        while ($data_b = mysqli_fetch_array($query_pesan)) {
-            echo "<tr>";
-            echo "<td>" . $no_b++ . "</td>";
-            echo "<td>" . $data_b['nama'] . "</td>";
-            echo "<td>" . $data_b['instansi'] . "</td>";
-            echo "<td>" . $data_b['pesan'] . "</td>";
-            echo "<td>
-                    <a href='lihat_buku.php?hapus_pesan=" . $data_b['id'] . "' style='color: red;' onclick='return confirm(\"Apakah Anda yakin ingin menghapus pesan ini?\")'>Hapus</a>
-                  </td>";
-            echo "</tr>";
-        }
-        
-        if (mysqli_num_rows($query_pesan) == 0) {
-            echo "<tr><td colspan='5' style='text-align: center;'>Belum ada pesan dari pengunjung.</td></tr>";
         }
         ?>
     </table>
