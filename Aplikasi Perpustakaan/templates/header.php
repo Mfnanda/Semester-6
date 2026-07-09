@@ -8,7 +8,7 @@
 <header class="topbar">
     <div class="navbar">
         <a href="index.php" class="brand">
-            <img src="assets/images/get_logo.jpg" alt="Logo Perpustakaan" class="brand-logo">
+            <img src="assets/images/pngtree-colorful-book-stack-logo-design-perfect-for-education-or-library-projects-vector-png-image_15444285.png" alt="Logo Perpustakaan" class="brand-logo">
             <span class="brand-text">Perpustakaan</span>
         </a>
         <nav class="menu">
