@@ -16,7 +16,13 @@ require '../config/koneksi.php';
 if (isset($_GET['action']) && isset($_GET['id'])) {
     $id = $_GET['id'];
     $action = $_GET['action'];
+    $status_baru = '';
 
+    if ($action == 'setujui') {
+        $status_baru = 'Dipinjam';
+    } elseif ($action == 'kembalikan') {
+        $status_baru = 'Dikembalikan';
+    }
     if ($action == 'setujui') {
         $status_baru = 'Dipinjam';
     } elseif ($action == 'kembalikan') {
