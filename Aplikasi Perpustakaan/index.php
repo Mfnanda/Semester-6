@@ -42,7 +42,19 @@ if ($menu == '') {
 } elseif ($menu == 'koleksi') {
     include 'koleksi.php';
 } elseif ($menu == 'pinjam') {
-    include 'pinjam.php';
+    // PERBAIKAN LOGIKA: Proteksi menu peminjaman berdasarkan Role Login
+    if (isset($_SESSION['role'])) {
+        if ($_SESSION['role'] == 'admin') {
+            // Jika yang klik adalah Admin
+            echo "<script>alert('Anda login sebagai Admin. Admin tidak perlu mengisi formulir peminjaman.'); window.location.href='admin/admin_dashboard.php';</script>";
+        } else {
+            // Jika yang klik adalah User biasa
+            echo "<script>window.location.href='user/form_pinjam.php';</script>";
+        }
+    } else {
+        // Jika belum login sama sekali (Guest)
+        echo "<script>alert('Silakan login terlebih dahulu untuk melakukan peminjaman buku!'); window.location.href='index.php?menu=login';</script>";
+    }
 } elseif ($menu == 'kontak') {
     include 'bukutamu.php';
 } elseif ($menu == 'tambah_buku') {
