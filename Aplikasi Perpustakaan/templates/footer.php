@@ -1,5 +1,10 @@
-</div> <footer class="text-center">
-    <p class="text-muted">&copy; 2026 Sistem Informasi Perpustakaan. All rights reserved.</p>
+</main>
+<footer class="site-footer">
+    <div class="footer-content">
+        <p>&copy; 2026 Sistem Informasi Perpustakaan. All rights reserved.</p>
+        <p>Terhubung dengan layanan perpustakaan modern dan terpercaya.</p>
+    </div>
 </footer>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

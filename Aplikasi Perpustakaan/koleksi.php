@@ -1,19 +1,24 @@
 <?php
-require 'config/koneksi.php';
+require_once __DIR__ . '/Config/koneksi.php';
 /** @var mysqli $koneksi */
 ?>
-<h2>📚 Daftar Koleksi Buku</h2>
-<p class="text-muted">Jelajahi koleksi buku terbaik kami.</p>
+<div class="card">
+    <div class="flex-between">
+        <div>
+            <h2 style="margin-bottom: 6px;">Koleksi Buku</h2>
+            <p class="text-muted" style="margin: 0;">Jelajahi katalog buku digital dan fisik yang tersedia di perpustakaan.</p>
+        </div>
+    </div>
 
-<div class="text-right form-group">
-    <form method="GET" action="index.php">
-        <input type="hidden" name="menu" value="koleksi">
-        <input type="text" name="cari" class="form-control" placeholder="Cari judul..." style="width: auto; display: inline-block;">
-        <input type="submit" value="Cari" class="btn btn-primary">
-    </form>
-</div>
+    <div class="text-right form-group">
+        <form method="GET" action="index.php">
+            <input type="hidden" name="menu" value="koleksi">
+            <input type="text" name="cari" class="form-control" placeholder="Cari judul atau pengarang..." style="width: 280px; display: inline-block;">
+            <input type="submit" value="Cari" class="btn btn-primary">
+        </form>
+    </div>
 
-<div class="grid-3">
+    <div class="grid-3">
     <?php
     $keyword = isset($_GET['cari']) ? $_GET['cari'] : '';
     if ($keyword != '') {
@@ -26,11 +31,11 @@ require 'config/koneksi.php';
         while ($data = mysqli_fetch_array($query)) {
             $sinopsis = (isset($data['sinopsis']) && $data['sinopsis'] != '') ? $data['sinopsis'] : "Sinopsis belum tersedia.";
             ?>
-            <div class="card">
-                <h3><?php echo $data['judul']; ?></h3>
-                <p class="text-muted">✍️ <?php echo $data['pengarang']; ?> | 📅 <?php echo $data['tahun']; ?></p>
+            <div class="card" style="margin-bottom: 0; min-height: 100%;">
+                <h3 style="margin-bottom: 8px;"><?php echo htmlspecialchars($data['judul']); ?></h3>
+                <p class="text-muted" style="margin-bottom: 10px;">✍️ <?php echo htmlspecialchars($data['pengarang']); ?> | 📅 <?php echo htmlspecialchars($data['tahun']); ?></p>
                 <hr>
-                <p><?php echo substr($sinopsis, 0, 160); ?>...</p>
+                <p><?php echo htmlspecialchars(substr($sinopsis, 0, 160)); ?>...</p>
                 <div class="text-center" style="margin-top: 15px;">
                     <?php if (isset($_SESSION['role'])): ?>
                         <a href="baca_buku.php?id=<?php echo $data['id']; ?>" class="btn btn-success btn-full">📖 Baca Isi</a>
@@ -45,4 +50,5 @@ require 'config/koneksi.php';
        echo '<div class="card text-center text-muted" style="grid-column: 1 / -1;">Buku tidak ditemukan.</div>';
     }
     ?>
+    </div>
 </div>

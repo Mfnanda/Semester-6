@@ -8,7 +8,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
 }
 
 // Memanggil koneksi database
-require 'config/koneksi.php';
+require_once __DIR__ . '/Config/koneksi.php';
 /** @var mysqli $koneksi */
 
 // Mengecek apakah ada parameter 'id' yang dikirimkan melalui URL

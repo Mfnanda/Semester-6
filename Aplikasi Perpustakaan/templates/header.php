@@ -5,9 +5,12 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<header>
+<header class="topbar">
     <div class="navbar">
-        <div class="logo">📚 Perpustakaan</div>
+        <a href="index.php" class="brand">
+            <img src="assets/images/get_logo.jpg" alt="Logo Perpustakaan" class="brand-logo">
+            <span class="brand-text">Perpustakaan</span>
+        </a>
         <nav class="menu">
             <a href="index.php">Home</a>
             <a href="index.php?menu=tentang">Tentang Kami</a>
@@ -15,7 +18,7 @@
             <a href="index.php?menu=koleksi">Koleksi Buku</a>
             <a href="index.php?menu=pinjam">Peminjaman</a>
             <a href="index.php?menu=kontak">Contact</a>
-            
+
             <?php if (isset($_SESSION['role'])): ?>
                 <?php if ($_SESSION['role'] == 'admin'): ?>
                     <a href="admin/admin_dashboard.php" class="nav-btn">Dashboard Admin</a>
@@ -29,5 +32,5 @@
         </nav>
     </div>
 </header>
-</body>
-</html>
+
+<main class="page-shell">

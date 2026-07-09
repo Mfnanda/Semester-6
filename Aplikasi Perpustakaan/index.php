@@ -7,24 +7,24 @@ $menu = isset($_GET['menu']) ? $_GET['menu'] : '';
 if ($menu == '') {
     ?>
     <div class="hero">
-        <h1>Selamat Datang di Perpustakaan Kami</h1>
-        <p>Jelajahi ribuan koleksi buku dan tingkatkan pengetahuan Anda bersama kami</p>
+        <h1>Selamat Datang di Sistem Informasi Perpustakaan</h1>
+        <p>Menjadi portal resmi untuk mengakses layanan koleksi, peminjaman, dan informasi perpustakaan secara modern dan terintegrasi.</p>
         <br>
         <a href="index.php?menu=koleksi" class="btn btn-primary">Lihat Koleksi Buku</a>
     </div>
-    
+
     <div class="grid-3">
         <div class="card text-center">
             <h4>📖 Koleksi Lengkap</h4>
-            <p>Ribuan judul buku dari berbagai kategori ilmu pengetahuan</p>
+            <p>Ribuan judul buku dari berbagai bidang ilmu pengetahuan dan referensi akademik.</p>
         </div>
         <div class="card text-center">
             <h4>🏢 Fasilitas Modern</h4>
-            <p>Ruang baca yang nyaman dan fasilitas lengkap untuk belajar</p>
+            <p>Ruang baca yang nyaman, teratur, dan mendukung kebutuhan belajar jangka panjang.</p>
         </div>
         <div class="card text-center">
             <h4>👥 Layanan Prima</h4>
-            <p>Tim pustakawan profesional siap membantu kebutuhan Anda</p>
+            <p>Tim pendukung siap membantu setiap kebutuhan akses dan layanan pengguna.</p>
         </div>
     </div>
     <?php

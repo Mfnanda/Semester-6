@@ -9,7 +9,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
     exit();
 }
 
-require '../config/koneksi.php';
+require_once __DIR__ . '/../Config/koneksi.php';
 /** @var mysqli $koneksi */
 
 // Mengambil Data Statistik untuk Dashboard
@@ -30,8 +30,8 @@ $menunggu = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM peminjaman WHE
 <div class="card">
     <div class="flex-between">
         <div>
-            <h2>Dashboard Admin</h2>
-            <p>Selamat datang kembali, <strong><?php echo $_SESSION['username']; ?></strong>.</p>
+            <h2 style="margin-bottom: 6px;">Dashboard Admin</h2>
+            <p style="margin: 0;">Selamat datang kembali, <strong><?php echo $_SESSION['username']; ?></strong>.</p>
         </div>
         <a href="../auth/logout.php" class="btn btn-danger">Logout</a>
     </div>
@@ -55,15 +55,15 @@ $menunggu = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM peminjaman WHE
         </div>
     </div>
 
-    <h3>Aksi Cepat</h3>
+    <h3 style="margin-top: 24px;">Aksi Cepat</h3>
     <div class="grid-4">
-        <a href="../index.php?menu=koleksi" class="card text-center">📚 Kelola Buku</a>
-        <a href="lihat_buku.php" class="card text-center">📋 Laporan Pinjam</a>
-        <a href="kelola_user.php" class="card text-center">👥 Kelola Pengguna</a>
-        <a href="../index.php" class="card text-center">🏠 Halaman Publik</a>
+        <a href="../index.php?menu=koleksi" class="card text-center" style="margin-bottom: 0;">📚 Kelola Buku</a>
+        <a href="lihat_buku.php" class="card text-center" style="margin-bottom: 0;">📋 Laporan Pinjam</a>
+        <a href="kelola_user.php" class="card text-center" style="margin-bottom: 0;">👥 Kelola Pengguna</a>
+        <a href="../index.php" class="card text-center" style="margin-bottom: 0;">🏠 Halaman Publik</a>
     </div>
 
-    <div class="card">
+    <div class="card" style="margin-top: 20px;">
         <h3>Pengajuan Terbaru</h3>
         <table class="table">
             <thead>

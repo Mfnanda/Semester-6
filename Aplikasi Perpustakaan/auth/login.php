@@ -16,7 +16,7 @@ if (isset($_SESSION['role'])) {
 
 // Jika tombol login ditekan
 if (isset($_POST['login'])) {
-    require 'config/koneksi.php';
+    require_once __DIR__ . '/../Config/koneksi.php';
     /** @var mysqli $koneksi */
     $username = mysqli_real_escape_string($koneksi, $_POST['username']);
     $password = mysqli_real_escape_string($koneksi, $_POST['password']); 
@@ -45,21 +45,23 @@ if (isset($_POST['login'])) {
 }
 ?>
 
-<div class="card card-small text-center">
-    <h3>Login Sistem</h3>
-    <p class="text-muted">Silakan masuk untuk melanjutkan</p>
-    
+<div class="card card-small">
+    <div class="text-center" style="margin-bottom: 20px;">
+        <h3 style="margin-bottom: 6px;">Portal Akses Sistem</h3>
+        <p class="text-muted" style="margin: 0;">Masuk untuk mengakses layanan perpustakaan</p>
+    </div>
+
     <form action="" method="POST">
         <div class="form-group text-left">
-            <label>Username:</label>
+            <label>Username</label>
             <input type="text" name="username" class="form-control" required>
         </div>
-        
+
         <div class="form-group text-left">
-            <label>Password:</label>
+            <label>Password</label>
             <input type="password" name="password" class="form-control" required>
         </div>
-        
-        <input type="submit" name="login" value="Masuk" class="btn btn-primary btn-full">
+
+        <input type="submit" name="login" value="Masuk Sekarang" class="btn btn-primary btn-full">
     </form>
 </div>

@@ -9,7 +9,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
     exit();
 }
 
-require '../config/koneksi.php';
+require_once __DIR__ . '/../Config/koneksi.php';
 /** @var mysqli $koneksi */
 
 $username_aktif = $_SESSION['username'];
@@ -33,8 +33,8 @@ $buku_dipegang = mysqli_num_rows($query_aktif);
 <div class="card">
     <div class="flex-between">
         <div>
-            <h2>Halo, <?php echo $username_aktif; ?>! 👋</h2>
-            <p>Selamat datang di ruang baca pribadimu.</p>
+            <h2 style="margin-bottom: 6px;">Halo, <?php echo htmlspecialchars($username_aktif); ?>! 👋</h2>
+            <p style="margin: 0;">Selamat datang di ruang baca pribadi Anda.</p>
         </div>
         <a href="../auth/logout.php" class="btn btn-danger">Logout</a>
     </div>
@@ -50,19 +50,19 @@ $buku_dipegang = mysqli_num_rows($query_aktif);
         </div>
     </div>
 
-    <h3>Mulai Aktivitas</h3>
+    <h3 style="margin-top: 22px;">Mulai Aktivitas</h3>
     <div class="grid-2">
-        <a href="../index.php?menu=koleksi" class="card text-center">
+        <a href="../index.php?menu=koleksi" class="card text-center" style="margin-bottom: 0;">
             <h3>📖 Eksplorasi Koleksi</h3>
             <p class="text-muted">Cari dan baca buku favoritmu.</p>
         </a>
-        <a href="form_pinjam.php" class="card text-center">
+        <a href="form_pinjam.php" class="card text-center" style="margin-bottom: 0;">
             <h3>✍️ Pinjam Buku Baru</h3>
             <p class="text-muted">Isi form reservasi fisik.</p>
         </a>
     </div>
 
-    <div class="card">
+    <div class="card" style="margin-top: 20px;">
         <h3>Status Buku Saya</h3>
         <table class="table">
             <thead>
