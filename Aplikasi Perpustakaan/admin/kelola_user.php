@@ -47,41 +47,44 @@ if (isset($_GET['hapus'])) {
     <title>Kelola Akun Pengguna</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body class="container">
-
-<div class="card" style="margin-top: 40px;">
-    <div class="flex-between">
-        <h2 style="margin: 0;">👥 Kelola Akun Pengguna</h2>
-        <a href="admin_dashboard.php" class="btn btn-secondary">Kembali ke Dashboard</a>
-    </div>
-    
-    <div class="card" style="background-color: #1e1f22; margin-bottom: 30px;">
-        <h3 style="margin-top: 0;">Tambah Akun Baru</h3>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="flex-between">
+            <div>
+                <h2 class="main-title">👥 Kelola Akun Pengguna</h2>
+                <p class="subtle-title">Tambah, lihat, dan kelola akses pengguna sistem perpustakaan.</p>
+            </div>
+            <a href="admin_dashboard.php" class="btn btn-secondary">Kembali ke Dashboard</a>
+        </div>
         
-        <form action="" method="POST">
-            <div class="form-group">
-                <label>Username:</label>
-                <input type="text" name="username" class="form-control" required>
-            </div>
+        <div class="card" style="background: var(--bg-2); margin-bottom: 24px;">
+            <h3 style="margin-top: 0;">Tambah Akun Baru</h3>
             
-            <div class="form-group">
-                <label>Password:</label>
-                <input type="text" name="password" class="form-control" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Hak Akses (Role):</label>
-                <select name="role" class="form-control">
-                    <option value="user">Pengunjung Biasa (User)</option>
-                    <option value="admin">Administrator (Admin)</option>
-                </select>
-            </div>
-            
-            <input type="submit" name="tambah" value="Simpan Akun Baru" class="btn btn-primary">
-        </form>
-    </div>
+            <form action="" method="POST">
+                <div class="form-group">
+                    <label>Username:</label>
+                    <input type="text" name="username" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="text" name="password" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Hak Akses (Role):</label>
+                    <select name="role" class="form-control">
+                        <option value="user">Pengunjung Biasa (User)</option>
+                        <option value="admin">Administrator (Admin)</option>
+                    </select>
+                </div>
+                
+                <input type="submit" name="tambah" value="Simpan Akun Baru" class="btn btn-primary">
+            </form>
+        </div>
 
-    <table class="table">
+        <table class="table">
         <thead>
             <tr>
                 <th>No</th>
@@ -108,14 +111,14 @@ if (isset($_GET['hapus'])) {
                     <?php if ($row['username'] == $_SESSION['username']) { ?>
                         <span class="text-muted">Sedang Dipakai</span>
                     <?php } else { ?>
-                        <a href="kelola_user.php?hapus=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus akun <?php echo $row['username']; ?>?');" style="padding: 5px 10px; font-size: 12px;">Hapus</a>
+                        <a href="kelola_user.php?hapus=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus akun <?php echo $row['username']; ?>?');" style="padding: 6px 12px; font-size: 12px;">Hapus</a>
                     <?php } ?>
                 </td>
             </tr>
             <?php } ?>
         </tbody>
     </table>
+    </div>
 </div>
-
 </body>
 </html>
