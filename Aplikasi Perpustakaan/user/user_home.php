@@ -27,57 +27,45 @@ $buku_dipegang = mysqli_num_rows($query_aktif);
 <head>
     <title>Portal Pengunjung</title>
     <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
-        .stat-card { padding: 20px; border-radius: 8px; color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .stat-card h3 { margin: 0; font-size: 28px; }
-        .stat-card p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
-        .bg-purple { background: linear-gradient(135deg, #6f42c1, #4c2889); }
-        .bg-teal { background: linear-gradient(135deg, #20c997, #138462); }
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px; }
-        .menu-item { background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #ddd; text-align: center; color: #333; text-decoration: none; transition: 0.2s; }
-        .menu-item:hover { background: #e9ecef; transform: translateY(-3px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .status-badge { padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; color: white; }
-    </style>
 </head>
-<body style="padding: 20px; font-family: sans-serif; background-color: #f4f7f6;">
+<body class="container">
 
-<div style="max-width: 900px; margin: 0 auto; background: #fff; border-radius: 10px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-    
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px;">
+<div class="card">
+    <div class="flex-between">
         <div>
-            <h2 style="color: #2c3e50; margin: 0;">Halo, <?php echo $username_aktif; ?>! 👋</h2>
-            <p style="color: #7f8c8d; margin: 5px 0 0 0; font-size: 14px;">Selamat datang di ruang baca pribadimu.</p>
+            <h2>Halo, <?php echo $username_aktif; ?>! 👋</h2>
+            <p>Selamat datang di ruang baca pribadimu.</p>
         </div>
-        <a href="../auth/logout.php" style="padding: 10px 20px; background-color: #d9534f; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Logout</a>
+        <a href="../auth/logout.php" class="btn btn-danger">Logout</a>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+    <div class="grid-2">
         <div class="stat-card bg-purple">
             <h3><?php echo $total_riwayat; ?></h3>
-            <p>📚 Total Riwayat Peminjaman</p>
+            <p>📚 Riwayat Peminjaman</p>
         </div>
         <div class="stat-card bg-teal">
             <h3><?php echo $buku_dipegang; ?></h3>
-            <p>📖 Buku Sedang Dipinjam</p>
+            <p>📖 Buku Dipinjam</p>
         </div>
     </div>
 
-    <h3 style="color: #2c3e50; margin-bottom: 10px;">Mulai Aktivitas Literasi</h3>
-    <div class="menu-grid">
-        <a href="../index.php?menu=koleksi" class="menu-item">
-            <h3 style="margin-top:0;">📖 Eksplorasi Koleksi</h3>
-            <p style="font-size: 14px; color: #555; margin-bottom:0;">Cari dan baca sinopsis buku favoritmu.</p>
+    <h3>Mulai Aktivitas</h3>
+    <div class="grid-2">
+        <a href="../index.php?menu=koleksi" class="card text-center">
+            <h3>📖 Eksplorasi Koleksi</h3>
+            <p class="text-muted">Cari dan baca buku favoritmu.</p>
         </a>
-        <a href="form_pinjam.php" class="menu-item">
-            <h3 style="margin-top:0;">✍️ Pinjam Buku Baru</h3>
-            <p style="font-size: 14px; color: #555; margin-bottom:0;">Isi form untuk reservasi buku fisik.</p>
+        <a href="form_pinjam.php" class="card text-center">
+            <h3>✍️ Pinjam Buku Baru</h3>
+            <p class="text-muted">Isi form reservasi fisik.</p>
         </a>
     </div>
 
-    <div style="margin-top: 40px;">
-        <h3 style="color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px;">Status Buku Saya</h3>
-        <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; text-align: left; margin-top: 15px;">
-            <thead style="background-color: #f2f2f2;">
+    <div class="card">
+        <h3>Status Buku Saya</h3>
+        <table class="table">
+            <thead>
                 <tr>
                     <th>Judul Buku</th>
                     <th>Tgl Pinjam</th>
@@ -87,32 +75,28 @@ $buku_dipegang = mysqli_num_rows($query_aktif);
             </thead>
             <tbody>
                 <?php 
-                // Menampilkan 5 riwayat terbaru milik user ini saja
                 $query_riwayat = mysqli_query($koneksi, "SELECT * FROM peminjaman WHERE username='$username_aktif' ORDER BY id DESC LIMIT 5");
                 if (mysqli_num_rows($query_riwayat) > 0) {
                     while ($row = mysqli_fetch_assoc($query_riwayat)) { 
-                        // Atur warna badge
-                        $bg = '#f0ad4e'; // Kuning untuk pending
-                        if ($row['status'] == 'Dipinjam') $bg = '#5bc0de'; // Biru
-                        if ($row['status'] == 'Dikembalikan') $bg = '#5cb85c'; // Hijau
+                        $cls = 'badge-warning';
+                        if ($row['status'] == 'Dipinjam') $cls = 'badge-info';
+                        if ($row['status'] == 'Dikembalikan') $cls = 'badge-success';
                 ?>
                 <tr>
                     <td><strong><?php echo htmlspecialchars($row['judul_buku']); ?></strong></td>
                     <td><?php echo $row['tanggal_pinjam']; ?></td>
                     <td><?php echo $row['tanggal_kembali']; ?></td>
-                    <td><span class="status-badge" style="background-color: <?php echo $bg; ?>;"><?php echo $row['status']; ?></span></td>
+                    <td><span class="badge <?php echo $cls; ?>"><?php echo $row['status']; ?></span></td>
                 </tr>
                 <?php 
                     } 
                 } else {
-                    echo "<tr><td colspan='4' style='text-align: center; color: #888;'>Belum ada riwayat peminjaman buku.</td></tr>";
+                    echo "<tr><td colspan='4' class='text-center text-muted'>Belum ada riwayat.</td></tr>";
                 }
                 ?>
             </tbody>
         </table>
     </div>
-
 </div>
-
 </body>
 </html>

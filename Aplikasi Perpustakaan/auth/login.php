@@ -45,17 +45,21 @@ if (isset($_POST['login'])) {
 }
 ?>
 
-<div style="max-width: 350px; margin: 40px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9; font-family: sans-serif;">
-    <h3 style="text-align: center; margin-top: 0; color: #333;">Login Sistem</h3>
-    <p style="text-align: center; font-size: 13px; color: #666;">Silakan masuk untuk melanjutkan</p>
+<div class="card card-small text-center">
+    <h3>Login Sistem</h3>
+    <p class="text-muted">Silakan masuk untuk melanjutkan</p>
     
     <form action="" method="POST">
-        <label style="font-size: 14px; font-weight: bold; color: #444;">Username:</label><br>
-        <input type="text" name="username" required style="width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"><br>
+        <div class="form-group text-left">
+            <label>Username:</label>
+            <input type="text" name="username" class="form-control" required>
+        </div>
         
-        <label style="font-size: 14px; font-weight: bold; color: #444;">Password:</label><br>
-        <input type="password" name="password" required style="width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"><br>
+        <div class="form-group text-left">
+            <label>Password:</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
         
-        <input type="submit" name="login" value="Masuk" style="width: 100%; padding: 10px; background-color: #333; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
+        <input type="submit" name="login" value="Masuk" class="btn btn-primary btn-full">
     </form>
 </div>

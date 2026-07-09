@@ -9,8 +9,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
     exit();
 }
 
-require '../config/koneksi.php';
-/** @var mysqli $koneksi */
+require_once __DIR__ . '/../Config/koneksi.php';
 
 // Proses Update Status ketika tombol aksi diklik Admin
 if (isset($_GET['action']) && isset($_GET['id'])) {
@@ -18,11 +17,6 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
     $action = $_GET['action'];
     $status_baru = '';
 
-    if ($action == 'setujui') {
-        $status_baru = 'Dipinjam';
-    } elseif ($action == 'kembalikan') {
-        $status_baru = 'Dikembalikan';
-    }
     if ($action == 'setujui') {
         $status_baru = 'Dipinjam';
     } elseif ($action == 'kembalikan') {
@@ -45,17 +39,16 @@ $query = mysqli_query($koneksi, "SELECT * FROM peminjaman ORDER BY created_at DE
     <title>Laporan Peminjaman Buku</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body style="padding: 20px; font-family: sans-serif; background-color: #f4f4f4;">
+<body class="container">
 
-<div style="max-width: 1000px; margin: 20px auto; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h2>Daftar Pengajuan Peminjaman Buku</h2>
-        <a href="admin_dashboard.php" style="padding: 8px 15px; background-color: #333; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 14px;">Kembali ke Dashboard</a>
+<div class="card" style="margin-top: 40px;">
+    <div class="flex-between">
+        <h2 style="margin: 0;">Daftar Pengajuan Peminjaman Buku</h2>
+        <a href="admin_dashboard.php" class="btn btn-secondary">Kembali ke Dashboard</a>
     </div>
-    <hr style="border: 1px solid #eee; margin-bottom: 20px;">
 
-    <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; text-align: left;">
-        <thead style="background-color: #f2f2f2;">
+    <table class="table">
+        <thead>
             <tr>
                 <th>No</th>
                 <th>Peminjam (User)</th>
@@ -70,10 +63,9 @@ $query = mysqli_query($koneksi, "SELECT * FROM peminjaman ORDER BY created_at DE
             <?php 
             $no = 1;
             while ($row = mysqli_fetch_assoc($query)) { 
-                // Tentukan warna label status agar menarik
-                $color = '#f0ad4e'; // kuning untuk Menunggu Persetujuan
-                if ($row['status'] == 'Dipinjam') $color = '#5bc0de'; // biru
-                if ($row['status'] == 'Dikembalikan') $color = '#5cb85c'; // hijau
+                $cls = 'badge-warning'; // kuning
+                if ($row['status'] == 'Dipinjam') $cls = 'badge-info'; // biru
+                if ($row['status'] == 'Dikembalikan') $cls = 'badge-success'; // hijau
             ?>
             <tr>
                 <td><?php echo $no++; ?></td>
@@ -81,14 +73,14 @@ $query = mysqli_query($koneksi, "SELECT * FROM peminjaman ORDER BY created_at DE
                 <td><?php echo $row['judul_buku']; ?></td>
                 <td><?php echo $row['tanggal_pinjam']; ?></td>
                 <td><?php echo $row['tanggal_kembali']; ?></td>
-                <td><span style="padding: 3px 8px; background-color: <?php echo $color; ?>; color: white; border-radius: 3px; font-size: 12px; font-weight: bold;"><?php echo $row['status']; ?></span></td>
+                <td><span class="badge <?php echo $cls; ?>"><?php echo $row['status']; ?></span></td>
                 <td>
                     <?php if ($row['status'] == 'Menunggu Persetujuan') { ?>
-                        <a href="lihat_buku.php?action=setujui&id=<?php echo $row['id']; ?>" onclick="return confirm('Setujui dan serahkan buku fisik ke siswa?')" style="color: blue; font-weight: bold; text-decoration: none; font-size: 14px;">✔️ Setujui & Pinjamkan</a>
+                        <a href="lihat_buku.php?action=setujui&id=<?php echo $row['id']; ?>" class="btn btn-primary" onclick="return confirm('Setujui dan serahkan buku fisik ke siswa?')" style="padding: 5px 10px; font-size: 12px;">✔️ Setujui</a>
                     <?php } elseif ($row['status'] == 'Dipinjam') { ?>
-                        <a href="lihat_buku.php?action=kembalikan&id=<?php echo $row['id']; ?>" onclick="return confirm('Konfirmasi bahwa buku telah dikembalikan dengan aman?')" style="color: green; font-weight: bold; text-decoration: none; font-size: 14px;">🔄 Tandai Dikembalikan</a>
+                        <a href="lihat_buku.php?action=kembalikan&id=<?php echo $row['id']; ?>" class="btn btn-success" onclick="return confirm('Konfirmasi bahwa buku telah dikembalikan dengan aman?')" style="padding: 5px 10px; font-size: 12px;">🔄 Kembalikan</a>
                     <?php } else { ?>
-                        <span style="color: #999; font-size: 14px;">Selesai</span>
+                        <span class="text-muted">Selesai</span>
                     <?php } ?>
                 </td>
             </tr>

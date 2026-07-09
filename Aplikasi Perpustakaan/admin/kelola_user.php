@@ -9,8 +9,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
     exit();
 }
 
-require '../config/koneksi.php';
-/** @var mysqli $koneksi */
+require_once __DIR__ . '/../Config/koneksi.php';
 
 // Jika tombol Simpan Akun Baru ditekan
 if (isset($_POST['tambah'])) {
@@ -23,7 +22,6 @@ if (isset($_POST['tambah'])) {
     if (mysqli_num_rows($cek) > 0) {
         echo "<script>alert('Username sudah terdaftar! Gunakan username lain.');</script>";
     } else {
-        // Insert tanpa kolom nama_lengkap
         $insert = mysqli_query($koneksi, "INSERT INTO users (username, password, role) VALUES ('$username', '$password', '$role')");
         if ($insert) {
             echo "<script>alert('Akun berhasil ditambahkan!'); window.location.href='kelola_user.php';</script>";
@@ -49,35 +47,42 @@ if (isset($_GET['hapus'])) {
     <title>Kelola Akun Pengguna</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body style="padding: 20px; font-family: sans-serif; background-color: #f4f4f4;">
+<body class="container">
 
-<div style="max-width: 800px; margin: 20px auto; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+<div class="card" style="margin-top: 40px;">
+    <div class="flex-between">
+        <h2 style="margin: 0;">👥 Kelola Akun Pengguna</h2>
+        <a href="admin_dashboard.php" class="btn btn-secondary">Kembali ke Dashboard</a>
+    </div>
     
-    <h2 style="color: #333; display: flex; align-items: center; gap: 10px;">👥 Kelola Akun Pengguna</h2>
-    <a href="admin_dashboard.php" style="color: #d9534f; text-decoration: none; font-weight: bold; margin-bottom: 20px; display: inline-block;">← Kembali ke Dashboard</a>
-    
-    <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 30px;">
+    <div class="card" style="background-color: #1e1f22; margin-bottom: 30px;">
         <h3 style="margin-top: 0;">Tambah Akun Baru</h3>
         
         <form action="" method="POST">
-            <label style="font-weight: bold; color: #444;">Username:</label><br>
-            <input type="text" name="username" required style="width: 100%; padding: 8px; margin: 8px 0 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"><br>
+            <div class="form-group">
+                <label>Username:</label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
             
-            <label style="font-weight: bold; color: #444;">Password:</label><br>
-            <input type="text" name="password" required style="width: 100%; padding: 8px; margin: 8px 0 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"><br>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="text" name="password" class="form-control" required>
+            </div>
             
-            <label style="font-weight: bold; color: #444;">Hak Akses (Role):</label><br>
-            <select name="role" style="width: 100%; padding: 8px; margin: 8px 0 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
-                <option value="user">Pengunjung Biasa (User)</option>
-                <option value="admin">Administrator (Admin)</option>
-            </select><br>
+            <div class="form-group">
+                <label>Hak Akses (Role):</label>
+                <select name="role" class="form-control">
+                    <option value="user">Pengunjung Biasa (User)</option>
+                    <option value="admin">Administrator (Admin)</option>
+                </select>
+            </div>
             
-            <input type="submit" name="tambah" value="Simpan Akun Baru" style="background-color: #2c3e50; color: white; padding: 10px 15px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
+            <input type="submit" name="tambah" value="Simpan Akun Baru" class="btn btn-primary">
         </form>
     </div>
 
-    <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; text-align: left;">
-        <thead style="background-color: #f2f2f2;">
+    <table class="table">
+        <thead>
             <tr>
                 <th>No</th>
                 <th>Username</th>
@@ -95,18 +100,15 @@ if (isset($_GET['hapus'])) {
                 <td><?php echo $no++; ?></td>
                 <td><?php echo htmlspecialchars($row['username']); ?></td>
                 <td>
-                    <strong style="color: <?php echo ($row['role'] == 'admin') ? 'blue' : '#555'; ?>; text-transform: uppercase;">
+                    <strong class="<?php echo ($row['role'] == 'admin') ? 'text-admin' : 'text-user'; ?>">
                         <?php echo $row['role']; ?>
                     </strong>
                 </td>
                 <td>
-                    <?php 
-                    // Mencegah admin menghapus akunnya sendiri yang sedang dipakai login
-                    if ($row['username'] == $_SESSION['username']) { 
-                    ?>
-                        <span style="color: #aaa; font-style: italic;">Sedang Dipakai</span>
+                    <?php if ($row['username'] == $_SESSION['username']) { ?>
+                        <span class="text-muted">Sedang Dipakai</span>
                     <?php } else { ?>
-                        <a href="kelola_user.php?hapus=<?php echo $row['id']; ?>" onclick="return confirm('Yakin ingin menghapus akun <?php echo $row['username']; ?>?');" style="color: red; text-decoration: none; font-weight: bold;">Hapus</a>
+                        <a href="kelola_user.php?hapus=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus akun <?php echo $row['username']; ?>?');" style="padding: 5px 10px; font-size: 12px;">Hapus</a>
                     <?php } ?>
                 </td>
             </tr>

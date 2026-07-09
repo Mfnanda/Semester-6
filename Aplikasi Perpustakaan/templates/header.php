@@ -16,24 +16,18 @@
             <a href="index.php?menu=pinjam">Peminjaman</a>
             <a href="index.php?menu=kontak">Contact</a>
             
-            <?php 
-            // Jika pengguna SUDAH LOGIN (Sesi Role sudah terbentuk)
-            if (isset($_SESSION['role'])): 
-            ?>
+            <?php if (isset($_SESSION['role'])): ?>
                 <?php if ($_SESSION['role'] == 'admin'): ?>
-                    <a href="admin/admin_dashboard.php" style="background-color: #204d74; color: #fff; border-radius: 4px;">Dashboard Admin</a>
+                    <a href="admin/admin_dashboard.php" class="nav-btn">Dashboard Admin</a>
                 <?php else: ?>
-                    <a href="user/user_home.php" style="background-color: #204d74; color: #fff; border-radius: 4px;">Menu User</a>
+                    <a href="user/user_home.php" class="nav-btn">Menu User</a>
                 <?php endif; ?>
-                
-                <a href="auth/logout.php" style="background-color: #d9534f; color: #fff; border-radius: 4px;" onclick="return confirm('Apakah Anda yakin ingin keluar?')">Logout</a>
-                
-            <?php 
-            // Jika pengguna BELUM LOGIN
-            else: 
-            ?>
-                <a href="index.php?menu=login" style="background-color: #111; color: #fff; border-radius: 4px;">Login</a>
+                <a href="auth/logout.php" class="nav-btn-danger" onclick="return confirm('Apakah Anda yakin ingin keluar?')">Logout</a>
+            <?php else: ?>
+                <a href="index.php?menu=login" class="nav-btn">Login</a>
             <?php endif; ?>
         </nav>
     </div>
 </header>
+</body>
+</html>
