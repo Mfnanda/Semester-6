@@ -1,8 +1,8 @@
 <div class="card">
     <div class="flex-between">
         <div>
-            <h2 style="margin-bottom: 6px;">Profil Perpustakaan</h2>
-            <p class="text-muted" style="margin: 0;">Mengenal lebih dekat layanan dan nilai yang kami bawakan.</p>
+            <h2 class="main-title">Profil Perpustakaan</h2>
+            <p class="subtle-title">Mengenal lebih dekat layanan dan nilai yang kami bawakan.</p>
         </div>
     </div>
 

@@ -21,13 +21,13 @@ if (isset($_POST['kirim_pesan'])) {
 <div class="card">
     <div class="flex-between" style="margin-bottom: 16px; border-bottom: none; padding-bottom: 0;">
         <div>
-            <h2 style="margin-bottom: 6px;">Kontak Kami</h2>
-            <p style="margin: 0;">Jika Anda ingin mengajukan kerja sama, bertanya terkait layanan, atau menyampaikan kebutuhan institusi, silakan gunakan kontak berikut.</p>
+            <h2 class="main-title">Kontak Kami</h2>
+            <p class="subtle-title">Jika Anda ingin mengajukan kerja sama, bertanya terkait layanan, atau menyampaikan kebutuhan institusi, silakan gunakan kontak berikut.</p>
         </div>
     </div>
 
     <div class="grid-2" style="margin-top: 16px;">
-        <div class="card" style="margin-bottom: 0; background: rgba(255,255,255,0.03);">
+        <div class="card" style="margin-bottom: 0; background: var(--bg-2);">
             <h4 style="margin-top: 0;">Informasi Perpustakaan</h4>
             <p style="margin: 8px 0;"><strong>Alamat:</strong> Jl. Pendidikan No. 1, Jakarta Raya</p>
             <p style="margin: 8px 0;"><strong>Email:</strong> perpus@kampus.com</p>
@@ -35,7 +35,7 @@ if (isset($_POST['kirim_pesan'])) {
             <p style="margin: 8px 0;"><strong>Jam Operasional:</strong> Senin - Jumat (08:00 - 16:00 WIB)</p>
         </div>
 
-        <div class="card" style="margin-bottom: 0; background: rgba(255,255,255,0.03);">
+        <div class="card" style="margin-bottom: 0; background: var(--bg-2);">
             <h4 style="margin-top: 0;">Tinggalkan Pesan</h4>
             <form action="" method="POST">
                 <div class="form-group">

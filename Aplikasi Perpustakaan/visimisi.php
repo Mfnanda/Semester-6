@@ -1,8 +1,8 @@
 <div class="card">
     <div class="flex-between">
         <div>
-            <h2 style="margin-bottom: 6px;">Visi dan Misi</h2>
-            <p class="text-muted" style="margin: 0;">Landasan utama dalam menjalankan layanan perpustakaan secara profesional.</p>
+            <h2 class="main-title">Visi dan Misi</h2>
+            <p class="subtle-title">Landasan utama dalam menjalankan layanan perpustakaan secara profesional.</p>
         </div>
     </div>
 

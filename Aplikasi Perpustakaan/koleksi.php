@@ -10,10 +10,10 @@ require_once __DIR__ . '/Config/koneksi.php';
         </div>
     </div>
 
-    <div class="text-right form-group">
-        <form method="GET" action="index.php">
+    <div class="form-group">
+        <form method="GET" action="index.php" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
             <input type="hidden" name="menu" value="koleksi">
-            <input type="text" name="cari" class="form-control" placeholder="Cari judul atau pengarang..." style="width: 280px; display: inline-block;">
+            <input type="text" name="cari" class="form-control" placeholder="Cari judul atau pengarang..." style="max-width: 320px; display: inline-block; margin: 0;">
             <input type="submit" value="Cari" class="btn btn-primary">
         </form>
     </div>

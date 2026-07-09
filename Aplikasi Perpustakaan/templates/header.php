@@ -9,7 +9,10 @@
     <div class="navbar">
         <a href="index.php" class="brand">
             <img src="assets/images/pngtree-colorful-book-stack-logo-design-perfect-for-education-or-library-projects-vector-png-image_15444285.png" alt="Logo Perpustakaan" class="brand-logo">
-            <span class="brand-text">Perpustakaan</span>
+            <span class="brand-text">
+                <span>Perpustakaan</span>
+                <small class="brand-sub">Sistem Informasi Digital</small>
+            </span>
         </a>
         <nav class="menu">
             <a href="index.php">Home</a>
