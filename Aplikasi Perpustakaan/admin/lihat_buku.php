@@ -38,6 +38,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM peminjaman ORDER BY created_at DE
 <head>
     <title>Laporan Peminjaman Buku</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body class="container">
 

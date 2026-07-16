@@ -46,6 +46,7 @@ if (isset($_GET['hapus'])) {
 <head>
     <title>Kelola Akun Pengguna</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <div class="container">

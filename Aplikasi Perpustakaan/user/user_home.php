@@ -27,6 +27,7 @@ $buku_dipegang = mysqli_num_rows($query_aktif);
 <head>
     <title>Portal Pengunjung</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body class="container">
 

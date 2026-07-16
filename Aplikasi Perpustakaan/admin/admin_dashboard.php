@@ -24,6 +24,7 @@ $menunggu = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM peminjaman WHE
 <head>
     <title>Dashboard Admin</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <div class="container">

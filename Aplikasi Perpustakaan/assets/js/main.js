@@ -12,15 +12,18 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('mouseleave', () => {
             link.style.transform = 'translateY(0)';
         });
+        link.addEventListener('click', () => {
+            link.style.transform = 'translateY(0)';
+        });
     });
 
     const hero = document.querySelector('.hero');
     if (hero) {
         hero.animate([
-            { opacity: 0, transform: 'translateY(8px)' },
+            { opacity: 0, transform: 'translateY(10px)' },
             { opacity: 1, transform: 'translateY(0)' }
         ], {
-            duration: 600,
+            duration: 650,
             easing: 'ease-out'
         });
     }

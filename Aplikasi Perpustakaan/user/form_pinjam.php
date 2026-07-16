@@ -35,6 +35,7 @@ if (isset($_POST['proses_pinjam'])) {
 <head>
     <title>Form Peminjaman Buku</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body class="container">
 

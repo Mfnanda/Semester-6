@@ -3,6 +3,7 @@
 <head>
     <title>Sistem Perpustakaan</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <header class="topbar">
@@ -14,7 +15,7 @@
                 <small class="brand-sub">Sistem Informasi Digital</small>
             </span>
         </a>
-        <nav class="menu">
+        <nav class="menu" aria-label="Navigasi utama">
             <a href="index.php">Home</a>
             <a href="index.php?menu=tentang">Tentang Kami</a>
             <a href="index.php?menu=visimisi">Visi Misi</a>
