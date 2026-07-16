@@ -307,6 +307,9 @@ main {
     .container {
         padding: 0 14px;
     }
+    .table {
+        white-space: nowrap; 
+    }
 }
 
 @media (max-width: 480px) {

@@ -19,7 +19,8 @@ $data = mysqli_fetch_array($query);
 <html>
 <head>
     <title>Membaca: <?php echo htmlspecialchars($data['judul']); ?></title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=4">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <div class="container" style="max-width: 900px; padding-top: 30px;">
