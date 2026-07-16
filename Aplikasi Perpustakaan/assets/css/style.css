@@ -386,3 +386,39 @@ main {
         font-size: 0.9rem;
     }
 }
+/* ===========================
+   MASTER ROLE STYLE
+=========================== */
+
+.master-badge{
+    display:inline-block;
+    margin-top:10px;
+    padding:10px 16px;
+    border-radius:999px;
+    background:linear-gradient(135deg,#f59e0b,#f97316);
+    color:#fff;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.3px;
+    box-shadow:0 4px 12px rgba(245,158,11,.25);
+}
+
+/* Dashboard Master */
+
+.master-dashboard .main-title{
+    color:#d97706;
+}
+
+.master-dashboard .stat-card{
+    position:relative;
+    overflow:hidden;
+}
+
+.master-dashboard .stat-card::after{
+    content:"👑";
+    position:absolute;
+    top:10px;
+    right:15px;
+    font-size:22px;
+    opacity:.15;
+}

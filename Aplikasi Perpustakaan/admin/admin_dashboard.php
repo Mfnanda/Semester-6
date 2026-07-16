@@ -4,8 +4,9 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // PROTEKSI HALAMAN
-if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
-    echo "<script>alert('Akses Ditolak! Anda harus login sebagai Admin.'); window.location.href='../index.php?menu=login';</script>";
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin' &&
+$_SESSION['role'] != 'master') {
+    echo "<script>alert('Akses Ditolak! Anda harus login sebagai Admin atau Master.'); window.location.href='../index.php?menu=login';</script>";
     exit();
 }
 
@@ -22,15 +23,30 @@ $baseUrl = '../';
 include '../templates/header.php';
 ?>
 
-<div class="container">
+<div class="container <?php echo ($_SESSION['role'] == 'master') ? 'master-dashboard' : ''; ?>">
     <div class="card">
         <div class="flex-between">
-            <div>
-                <h2 class="main-title">Dashboard Admin</h2>
-                <p class="subtle-title">Selamat datang kembali, <strong><?php echo $_SESSION['username']; ?></strong>.</p>
+    <div>
+
+        <?php $isMaster = ($_SESSION['role'] == 'master'); ?>
+
+        <h2 class="main-title">
+            <?php echo $isMaster ? '👑 Dashboard Master' : '🛠 Dashboard Admin'; ?>
+        </h2>
+
+        <p class="subtle-title">
+            Selamat datang kembali,
+            <strong><?php echo htmlspecialchars($_SESSION['username']); ?></strong>.
+        </p>
+
+        <?php if($isMaster): ?>
+            <div class="master-badge">
+                👑 MASTER ACCESS - Hak Akses Tertinggi
             </div>
-            <a href="../auth/logout.php" class="btn btn-danger">Logout</a>
-        </div>
+        <?php endif; ?>
+
+    </div>
+</div>
 
         <div class="grid-4">
             <div class="stat-card bg-blue">
@@ -55,7 +71,11 @@ include '../templates/header.php';
         <div class="grid-4">
             <a href="../index.php?menu=koleksi" class="card text-center" style="margin-bottom: 0;">📚 Kelola Buku</a>
             <a href="lihat_buku.php" class="card text-center" style="margin-bottom: 0;">📋 Laporan Pinjam</a>
-            <a href="kelola_user.php" class="card text-center" style="margin-bottom: 0;">👥 Kelola Pengguna</a>
+            <a href="kelola_user.php" class="card text-center" style="margin-bottom: 0;">
+            <?php echo ($_SESSION['role'] == 'master')
+                ? '👑 Kelola Admin & User'
+                : '👥 Kelola Pengguna'; ?>
+            </a>
             <a href="lihat_pesan.php" class="card text-center" style="margin-bottom: 0;">💬 Lihat Pesan Kontak</a>
             <a href="../index.php" class="card text-center" style="margin-bottom: 0;">🏠 Halaman Publik</a>
         </div>

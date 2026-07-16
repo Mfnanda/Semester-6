@@ -5,9 +5,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Cek jika sudah login, langsung arahkan ke halaman masing-masing
 if (isset($_SESSION['role'])) {
-    if ($_SESSION['role'] == 'admin') {
-        header("Location: admin/admin_dashboard.php");
-        exit();
+    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'master') {
+    header("Location: ../admin/admin_dashboard.php");
+    exit();
     } else {
         header("Location: user/user_home.php");
         exit();
@@ -33,10 +33,14 @@ if (isset($_POST['login'])) {
         $_SESSION['role'] = $data['role'];
 
         // Arahkan berdasarkan role
-        if ($data['role'] == 'admin') {
-            echo "<script>alert('Selamat datang, Admin!'); window.location.href='admin/admin_dashboard.php';</script>";
-        } else if ($data['role'] == 'user') {
-            echo "<script>alert('Selamat datang, User!'); window.location.href='user/user_home.php';</script>";
+        if ($data['role'] == 'master') {
+         echo "<script>alert('Selamat datang, Master!'); window.location.href='../admin/admin_dashboard.php';</script>";
+        }
+        else if ($data['role'] == 'admin') {
+         echo "<script>alert('Selamat datang, Admin!'); window.location.href='../admin/admin_dashboard.php';</script>";
+        }
+        else {
+         echo "<script>alert('Selamat datang, User!'); window.location.href='../user/user_home.php';</script>";
         }
         exit();
     } else {

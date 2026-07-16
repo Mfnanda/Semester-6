@@ -7,7 +7,8 @@
         session_start();
     }
 
-    if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin' &&
+$_SESSION['role'] != 'master') {
         echo "<script>alert('Akses Ditolak!'); window.location.href='index.php?menu=koleksi';</script>";
         exit();
     }

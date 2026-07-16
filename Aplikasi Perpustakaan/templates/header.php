@@ -1,4 +1,8 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $baseUrl = isset($baseUrl) ? $baseUrl : '';
 ?>
 <!DOCTYPE html>
@@ -31,15 +35,44 @@ $baseUrl = isset($baseUrl) ? $baseUrl : '';
             <a href="<?php echo $baseUrl; ?>index.php?menu=pinjam">Peminjaman</a>
             <a href="<?php echo $baseUrl; ?>index.php?menu=kontak">Contact</a>
 
-            <?php if (isset($_SESSION['role'])): ?>
-                <?php if ($_SESSION['role'] == 'admin'): ?>
-                    <a href="<?php echo $baseUrl; ?>admin/admin_dashboard.php" class="nav-btn">Dashboard Admin</a>
-                <?php else: ?>
-                    <a href="<?php echo $baseUrl; ?>user/user_home.php" class="nav-btn">Menu User</a>
-                <?php endif; ?>
-                <a href="<?php echo $baseUrl; ?>auth/logout.php" class="nav-btn-danger" onclick="return confirm('Apakah Anda yakin ingin keluar?')">Logout</a>
+            <?php if(isset($_SESSION['role'])): ?>
+
+            <?php if($_SESSION['role'] == 'master'): ?>
+
+                <a href="<?php echo $baseUrl; ?>admin/admin_dashboard.php"
+                class="nav-btn">
+                    👑 Dashboard Master
+                </a>
+
+            <?php elseif($_SESSION['role'] == 'admin'): ?>
+
+                <a href="<?php echo $baseUrl; ?>admin/admin_dashboard.php"
+                class="nav-btn">
+                    Dashboard Admin
+                </a>
+
             <?php else: ?>
-                <a href="<?php echo $baseUrl; ?>index.php?menu=login" class="nav-btn">Login</a>
+
+                <a href="<?php echo $baseUrl; ?>user/user_home.php"
+                class="nav-btn">
+                    Menu User
+                </a>
+
+            <?php endif; ?>
+
+            <a href="<?php echo $baseUrl; ?>auth/logout.php"
+            class="nav-btn-danger"
+            onclick="return confirm('Apakah Anda yakin ingin keluar?')">
+                Logout
+            </a>
+
+            <?php else: ?>
+
+                <a href="<?php echo $baseUrl; ?>index.php?menu=login"
+                class="nav-btn">
+                    Login
+                </a>
+
             <?php endif; ?>
         </nav>
     </div>

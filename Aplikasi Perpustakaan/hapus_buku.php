@@ -3,7 +3,8 @@
 session_start();
 
 // Proteksi Keamanan: Tolak jika yang akses bukan admin
-if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin' &&
+$_SESSION['role'] != 'master') {
     die("<script>alert('Akses Ditolak! Anda bukan admin.'); window.location.href='index.php?menu=koleksi';</script>");
 }
 

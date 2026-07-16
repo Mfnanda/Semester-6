@@ -3,7 +3,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin' &&
+$_SESSION['role'] != 'master') {
     echo "<script>alert('Akses Ditolak!'); window.location.href='../index.php?menu=login';</script>";
     exit();
 }
