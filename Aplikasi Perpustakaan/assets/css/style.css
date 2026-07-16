@@ -186,6 +186,11 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 20px 0; }
     background: var(--panel);
     border-radius: 12px;
     overflow: hidden;
+    min-width: 620px;
+}
+.table-responsive {
+    overflow-x: auto;
+    border-radius: 12px;
 }
 .table th {
     background: var(--panel-2);

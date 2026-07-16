@@ -5,6 +5,7 @@
         <p>Terhubung dengan layanan perpustakaan modern dan terpercaya.</p>
     </div>
 </footer>
-<script src="assets/js/main.js"></script>
+<?php $baseUrl = isset($baseUrl) ? $baseUrl : ''; ?>
+<script src="<?php echo $baseUrl; ?>assets/js/main.js"></script>
 </body>
 </html>

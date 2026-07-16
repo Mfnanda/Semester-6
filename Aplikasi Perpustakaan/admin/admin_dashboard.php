@@ -17,16 +17,11 @@ $jml_buku = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM buku"));
 $jml_user = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM users WHERE role='user'"));
 $pinjam_aktif = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM peminjaman WHERE status='Dipinjam'"));
 $menunggu = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM peminjaman WHERE status='Menunggu Persetujuan'"));
+
+$baseUrl = '../';
+include '../templates/header.php';
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard Admin</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
 <div class="container">
     <div class="card">
         <div class="flex-between">
@@ -66,37 +61,39 @@ $menunggu = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM peminjaman WHE
 
         <div class="card" style="margin-top: 20px;">
             <h3>Pengajuan Terbaru</h3>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Judul Buku</th>
-                        <th>Tgl Pinjam</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                    $query_pending = mysqli_query($koneksi, "SELECT * FROM peminjaman WHERE status='Menunggu Persetujuan' ORDER BY id DESC LIMIT 3");
-                    if (mysqli_num_rows($query_pending) > 0) {
-                        while ($row = mysqli_fetch_assoc($query_pending)) { 
-                    ?>
-                    <tr>
-                        <td><strong><?php echo htmlspecialchars($row['username']); ?></strong></td>
-                        <td><?php echo htmlspecialchars($row['judul_buku']); ?></td>
-                        <td><?php echo htmlspecialchars($row['tanggal_pinjam']); ?></td>
-                        <td><a href="lihat_buku.php">Proses →</a></td>
-                    </tr>
-                    <?php 
-                        } 
-                    } else {
-                        echo "<tr><td colspan='4' class='text-center text-muted'>Tidak ada pengajuan.</td></tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Judul Buku</th>
+                            <th>Tgl Pinjam</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                        $query_pending = mysqli_query($koneksi, "SELECT * FROM peminjaman WHERE status='Menunggu Persetujuan' ORDER BY id DESC LIMIT 3");
+                        if (mysqli_num_rows($query_pending) > 0) {
+                            while ($row = mysqli_fetch_assoc($query_pending)) { 
+                        ?>
+                        <tr>
+                            <td><strong><?php echo htmlspecialchars($row['username']); ?></strong></td>
+                            <td><?php echo htmlspecialchars($row['judul_buku']); ?></td>
+                            <td><?php echo htmlspecialchars($row['tanggal_pinjam']); ?></td>
+                            <td><a href="lihat_buku.php">Proses →</a></td>
+                        </tr>
+                        <?php 
+                            } 
+                        } else {
+                            echo "<tr><td colspan='4' class='text-center text-muted'>Tidak ada pengajuan.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
-</body>
-</html>
+
+<?php include '../templates/footer.php'; ?>

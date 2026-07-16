@@ -31,64 +31,64 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
 
 // Ambil data peminjaman
 $query = mysqli_query($koneksi, "SELECT * FROM peminjaman ORDER BY created_at DESC");
+
+$baseUrl = '../';
+include '../templates/header.php';
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Laporan Peminjaman Buku</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body class="container">
+<div class="container">
+    <div class="card">
+        <div class="flex-between">
+            <div>
+                <h2 class="main-title">Daftar Pengajuan Peminjaman Buku</h2>
+                <p class="subtle-title">Kelola status peminjaman dengan cepat dan teratur.</p>
+            </div>
+            <a href="admin_dashboard.php" class="btn btn-secondary">Kembali ke Dashboard</a>
+        </div>
 
-<div class="card" style="margin-top: 40px;">
-    <div class="flex-between">
-        <h2 style="margin: 0;">Daftar Pengajuan Peminjaman Buku</h2>
-        <a href="admin_dashboard.php" class="btn btn-secondary">Kembali ke Dashboard</a>
-    </div>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Peminjam (User)</th>
-                <th>Judul Buku</th>
-                <th>Tgl Pinjam</th>
-                <th>Tgl Kembali</th>
-                <th>Status</th>
-                <th>Aksi Kendali</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-            $no = 1;
-            while ($row = mysqli_fetch_assoc($query)) { 
-                $cls = 'badge-warning'; // kuning
-                if ($row['status'] == 'Dipinjam') $cls = 'badge-info'; // biru
-                if ($row['status'] == 'Dikembalikan') $cls = 'badge-success'; // hijau
-            ?>
-            <tr>
-                <td><?php echo $no++; ?></td>
-                <td><strong><?php echo $row['username']; ?></strong></td>
-                <td><?php echo $row['judul_buku']; ?></td>
-                <td><?php echo $row['tanggal_pinjam']; ?></td>
-                <td><?php echo $row['tanggal_kembali']; ?></td>
-                <td><span class="badge <?php echo $cls; ?>"><?php echo $row['status']; ?></span></td>
-                <td>
-                    <?php if ($row['status'] == 'Menunggu Persetujuan') { ?>
-                        <a href="lihat_buku.php?action=setujui&id=<?php echo $row['id']; ?>" class="btn btn-primary" onclick="return confirm('Setujui dan serahkan buku fisik ke siswa?')" style="padding: 5px 10px; font-size: 12px;">✔️ Setujui</a>
-                    <?php } elseif ($row['status'] == 'Dipinjam') { ?>
-                        <a href="lihat_buku.php?action=kembalikan&id=<?php echo $row['id']; ?>" class="btn btn-success" onclick="return confirm('Konfirmasi bahwa buku telah dikembalikan dengan aman?')" style="padding: 5px 10px; font-size: 12px;">🔄 Kembalikan</a>
-                    <?php } else { ?>
-                        <span class="text-muted">Selesai</span>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Peminjam (User)</th>
+                        <th>Judul Buku</th>
+                        <th>Tgl Pinjam</th>
+                        <th>Tgl Kembali</th>
+                        <th>Status</th>
+                        <th>Aksi Kendali</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    $no = 1;
+                    while ($row = mysqli_fetch_assoc($query)) { 
+                        $cls = 'badge-warning'; // kuning
+                        if ($row['status'] == 'Dipinjam') $cls = 'badge-info'; // biru
+                        if ($row['status'] == 'Dikembalikan') $cls = 'badge-success'; // hijau
+                    ?>
+                    <tr>
+                        <td><?php echo $no++; ?></td>
+                        <td><strong><?php echo htmlspecialchars($row['username']); ?></strong></td>
+                        <td><?php echo htmlspecialchars($row['judul_buku']); ?></td>
+                        <td><?php echo htmlspecialchars($row['tanggal_pinjam']); ?></td>
+                        <td><?php echo htmlspecialchars($row['tanggal_kembali']); ?></td>
+                        <td><span class="badge <?php echo $cls; ?>"><?php echo htmlspecialchars($row['status']); ?></span></td>
+                        <td>
+                            <?php if ($row['status'] == 'Menunggu Persetujuan') { ?>
+                                <a href="lihat_buku.php?action=setujui&id=<?php echo $row['id']; ?>" class="btn btn-primary" onclick="return confirm('Setujui dan serahkan buku fisik ke siswa?')" style="padding: 5px 10px; font-size: 12px;">✔️ Setujui</a>
+                            <?php } elseif ($row['status'] == 'Dipinjam') { ?>
+                                <a href="lihat_buku.php?action=kembalikan&id=<?php echo $row['id']; ?>" class="btn btn-success" onclick="return confirm('Konfirmasi bahwa buku telah dikembalikan dengan aman?')" style="padding: 5px 10px; font-size: 12px;">🔄 Kembalikan</a>
+                            <?php } else { ?>
+                                <span class="text-muted">Selesai</span>
+                            <?php } ?>
+                        </td>
+                    </tr>
                     <?php } ?>
-                </td>
-            </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
-</body>
-</html>
+<?php include '../templates/footer.php'; ?>

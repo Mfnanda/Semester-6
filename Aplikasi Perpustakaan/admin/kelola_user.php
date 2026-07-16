@@ -39,16 +39,11 @@ if (isset($_GET['hapus'])) {
         echo "<script>alert('Akun berhasil dihapus!'); window.location.href='kelola_user.php';</script>";
     }
 }
+
+$baseUrl = '../';
+include '../templates/header.php';
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Kelola Akun Pengguna</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
 <div class="container">
     <div class="card">
         <div class="flex-between">
@@ -85,41 +80,43 @@ if (isset($_GET['hapus'])) {
             </form>
         </div>
 
-        <table class="table">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Username</th>
-                <th>Role</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $query = mysqli_query($koneksi, "SELECT * FROM users ORDER BY id ASC");
-            $no = 1;
-            while ($row = mysqli_fetch_assoc($query)) {
-            ?>
-            <tr>
-                <td><?php echo $no++; ?></td>
-                <td><?php echo htmlspecialchars($row['username']); ?></td>
-                <td>
-                    <strong class="<?php echo ($row['role'] == 'admin') ? 'text-admin' : 'text-user'; ?>">
-                        <?php echo $row['role']; ?>
-                    </strong>
-                </td>
-                <td>
-                    <?php if ($row['username'] == $_SESSION['username']) { ?>
-                        <span class="text-muted">Sedang Dipakai</span>
-                    <?php } else { ?>
-                        <a href="kelola_user.php?hapus=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus akun <?php echo $row['username']; ?>?');" style="padding: 6px 12px; font-size: 12px;">Hapus</a>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $query = mysqli_query($koneksi, "SELECT * FROM users ORDER BY id ASC");
+                    $no = 1;
+                    while ($row = mysqli_fetch_assoc($query)) {
+                    ?>
+                    <tr>
+                        <td><?php echo $no++; ?></td>
+                        <td><?php echo htmlspecialchars($row['username']); ?></td>
+                        <td>
+                            <strong class="<?php echo ($row['role'] == 'admin') ? 'text-admin' : 'text-user'; ?>">
+                                <?php echo $row['role']; ?>
+                            </strong>
+                        </td>
+                        <td>
+                            <?php if ($row['username'] == $_SESSION['username']) { ?>
+                                <span class="text-muted">Sedang Dipakai</span>
+                            <?php } else { ?>
+                                <a href="kelola_user.php?hapus=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus akun <?php echo $row['username']; ?>?');" style="padding: 6px 12px; font-size: 12px;">Hapus</a>
+                            <?php } ?>
+                        </td>
+                    </tr>
                     <?php } ?>
-                </td>
-            </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-</body>
-</html>
+
+<?php include '../templates/footer.php'; ?>
