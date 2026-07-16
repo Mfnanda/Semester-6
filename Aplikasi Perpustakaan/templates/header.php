@@ -5,7 +5,7 @@ $baseUrl = isset($baseUrl) ? $baseUrl : '';
 <html>
 <head>
     <title>Sistem Perpustakaan</title>
-    <link rel="stylesheet" href="<?php echo $baseUrl; ?>assets/css/style.css?v=4">
+    <link rel="stylesheet" href="<?php echo $baseUrl; ?>assets/css/style.css?v=6">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -18,7 +18,12 @@ $baseUrl = isset($baseUrl) ? $baseUrl : '';
                 <small class="brand-sub">Sistem Informasi Digital</small>
             </span>
         </a>
-        <nav class="menu" aria-label="Navigasi utama">
+        <button class="menu-toggle" type="button" aria-label="Buka menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="menu" id="siteMenu" aria-label="Navigasi utama">
             <a href="<?php echo $baseUrl; ?>index.php">Home</a>
             <a href="<?php echo $baseUrl; ?>index.php?menu=tentang">Tentang Kami</a>
             <a href="<?php echo $baseUrl; ?>index.php?menu=visimisi">Visi Misi</a>

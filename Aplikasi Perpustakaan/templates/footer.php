@@ -6,6 +6,6 @@
     </div>
 </footer>
 <?php $baseUrl = isset($baseUrl) ? $baseUrl : ''; ?>
-<script src="<?php echo $baseUrl; ?>assets/js/main.js"></script>
+<script src="<?php echo $baseUrl; ?>assets/js/main.js?v=2"></script>
 </body>
 </html>

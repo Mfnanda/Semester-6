@@ -3,6 +3,15 @@
     <p class="text-muted" style="margin-top: 0;">Silakan ubah informasi buku di bawah ini.</p>
 
     <?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+        echo "<script>alert('Akses Ditolak!'); window.location.href='index.php?menu=koleksi';</script>";
+        exit();
+    }
+
     require_once __DIR__ . '/Config/koneksi.php';
     /** @var mysqli $koneksi */
 
@@ -20,11 +29,13 @@
     }
 
     if (isset($_POST['update_buku'])) {
-        $judul = $_POST['judul'];
-        $pengarang = $_POST['pengarang'];
-        $tahun = $_POST['tahun'];
+        $judul = mysqli_real_escape_string($koneksi, trim($_POST['judul']));
+        $pengarang = mysqli_real_escape_string($koneksi, trim($_POST['pengarang']));
+        $tahun = mysqli_real_escape_string($koneksi, trim($_POST['tahun']));
+        $sinopsis = mysqli_real_escape_string($koneksi, trim($_POST['sinopsis']));
+        $isi_buku = mysqli_real_escape_string($koneksi, trim($_POST['isi_buku']));
 
-        $query_update = "UPDATE buku SET judul='$judul', pengarang='$pengarang', tahun='$tahun' WHERE id='$id'";
+        $query_update = "UPDATE buku SET judul='$judul', pengarang='$pengarang', tahun='$tahun', sinopsis='$sinopsis', isi_buku='$isi_buku' WHERE id='$id'";
         $update = mysqli_query($koneksi, $query_update);
 
         if ($update) {
@@ -52,6 +63,16 @@
         <div class="form-group">
             <label>Tahun Terbit</label>
             <input type="text" name="tahun" value="<?php echo htmlspecialchars($data['tahun']); ?>" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label>Sinopsis</label>
+            <textarea name="sinopsis" class="form-control" rows="4"><?php echo htmlspecialchars($data['sinopsis'] ?? ''); ?></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Isi Buku</label>
+            <textarea name="isi_buku" class="form-control" rows="10"><?php echo htmlspecialchars($data['isi_buku'] ?? ''); ?></textarea>
         </div>
 
         <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px;">

@@ -7,11 +7,13 @@
     /** @var mysqli $koneksi */
 
     if (isset($_POST['simpan_buku'])) {
-        $judul = $_POST['judul'];
-        $pengarang = $_POST['pengarang'];
-        $tahun = $_POST['tahun'];
+        $judul = mysqli_real_escape_string($koneksi, trim($_POST['judul']));
+        $pengarang = mysqli_real_escape_string($koneksi, trim($_POST['pengarang']));
+        $tahun = mysqli_real_escape_string($koneksi, trim($_POST['tahun']));
+        $sinopsis = mysqli_real_escape_string($koneksi, trim($_POST['sinopsis']));
+        $isi_buku = mysqli_real_escape_string($koneksi, trim($_POST['isi_buku']));
 
-        $query = "INSERT INTO buku (judul, pengarang, tahun) VALUES ('$judul', '$pengarang', '$tahun')";
+        $query = "INSERT INTO buku (judul, pengarang, tahun, sinopsis, isi_buku) VALUES ('$judul', '$pengarang', '$tahun', '$sinopsis', '$isi_buku')";
         $simpan = mysqli_query($koneksi, $query);
 
         if ($simpan) {
@@ -39,6 +41,16 @@
         <div class="form-group">
             <label>Tahun Terbit</label>
             <input type="text" name="tahun" class="form-control" required placeholder="Contoh: 2024">
+        </div>
+
+        <div class="form-group">
+            <label>Sinopsis</label>
+            <textarea name="sinopsis" class="form-control" rows="4" placeholder="Masukkan ringkasan singkat buku"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Isi Buku</label>
+            <textarea name="isi_buku" class="form-control" rows="10" placeholder="Masukkan isi lengkap buku"></textarea>
         </div>
 
         <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px;">

@@ -4,39 +4,63 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Proteksi halaman admin
-if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin', 'master'], true)) {
     echo "<script>alert('Akses Ditolak!'); window.location.href='../index.php?menu=login';</script>";
     exit();
 }
+
+$isMaster = isset($_SESSION['role']) && $_SESSION['role'] === 'master';
+$allowedRoles = ['user', 'admin', 'master'];
 
 require_once __DIR__ . '/../Config/koneksi.php';
 
 // Jika tombol Simpan Akun Baru ditekan
 if (isset($_POST['tambah'])) {
-    $username = mysqli_real_escape_string($koneksi, $_POST['username']);
-    $password = mysqli_real_escape_string($koneksi, $_POST['password']); 
-    $role = $_POST['role'];
-
-    // Cek apakah username sudah ada
-    $cek = mysqli_query($koneksi, "SELECT * FROM users WHERE username='$username'");
-    if (mysqli_num_rows($cek) > 0) {
-        echo "<script>alert('Username sudah terdaftar! Gunakan username lain.');</script>";
+    if (!$isMaster) {
+        echo "<script>alert('Hanya master yang dapat menambah akun baru.');</script>";
     } else {
-        $insert = mysqli_query($koneksi, "INSERT INTO users (username, password, role) VALUES ('$username', '$password', '$role')");
-        if ($insert) {
-            echo "<script>alert('Akun berhasil ditambahkan!'); window.location.href='kelola_user.php';</script>";
+        $username = mysqli_real_escape_string($koneksi, trim($_POST['username']));
+        $password = mysqli_real_escape_string($koneksi, trim($_POST['password']));
+        $role = in_array($_POST['role'], $allowedRoles, true) ? $_POST['role'] : 'user';
+
+        if ($username === '') {
+            echo "<script>alert('Username tidak boleh kosong.');</script>";
+        } elseif ($password === '') {
+            echo "<script>alert('Password tidak boleh kosong.');</script>";
         } else {
-            echo "<script>alert('Gagal menambah akun!');</script>";
+            $cek = mysqli_query($koneksi, "SELECT * FROM users WHERE username='$username'");
+            if (mysqli_num_rows($cek) > 0) {
+                echo "<script>alert('Username sudah terdaftar! Gunakan username lain.');</script>";
+            } else {
+                $insert = mysqli_query($koneksi, "INSERT INTO users (username, password, role) VALUES ('$username', '$password', '$role')");
+                if ($insert) {
+                    echo "<script>alert('Akun berhasil ditambahkan!'); window.location.href='kelola_user.php';</script>";
+                } else {
+                    echo "<script>alert('Gagal menambah akun!');</script>";
+                }
+            }
         }
     }
 }
 
 // Jika tombol Hapus ditekan
 if (isset($_GET['hapus'])) {
-    $id_hapus = $_GET['hapus'];
-    $hapus = mysqli_query($koneksi, "DELETE FROM users WHERE id='$id_hapus'");
-    if ($hapus) {
-        echo "<script>alert('Akun berhasil dihapus!'); window.location.href='kelola_user.php';</script>";
+    $id_hapus = (int) $_GET['hapus'];
+
+    $userData = mysqli_query($koneksi, "SELECT * FROM users WHERE id='$id_hapus'");
+    if (mysqli_num_rows($userData) > 0) {
+        $user = mysqli_fetch_assoc($userData);
+
+        if ($user['username'] === $_SESSION['username']) {
+            echo "<script>alert('Anda tidak bisa menghapus akun Anda sendiri.'); window.location.href='kelola_user.php';</script>";
+        } elseif (!$isMaster && ($user['role'] === 'admin' || $user['role'] === 'master')) {
+            echo "<script>alert('Admin tidak bisa menghapus akun admin lain atau master.'); window.location.href='kelola_user.php';</script>";
+        } else {
+            $hapus = mysqli_query($koneksi, "DELETE FROM users WHERE id='$id_hapus'");
+            if ($hapus) {
+                echo "<script>alert('Akun berhasil dihapus!'); window.location.href='kelola_user.php';</script>";
+            }
+        }
     }
 }
 
@@ -71,8 +95,11 @@ include '../templates/header.php';
                 <div class="form-group">
                     <label>Hak Akses (Role):</label>
                     <select name="role" class="form-control">
-                        <option value="user">Pengunjung Biasa (User)</option>
-                        <option value="admin">Administrator (Admin)</option>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                        <?php if ($isMaster): ?>
+                            <option value="master">Master</option>
+                        <?php endif; ?>
                     </select>
                 </div>
                 
@@ -100,13 +127,30 @@ include '../templates/header.php';
                         <td><?php echo $no++; ?></td>
                         <td><?php echo htmlspecialchars($row['username']); ?></td>
                         <td>
-                            <strong class="<?php echo ($row['role'] == 'admin') ? 'text-admin' : 'text-user'; ?>">
-                                <?php echo $row['role']; ?>
-                            </strong>
+                            <?php
+                                $roleClass = 'text-user';
+                                $roleLabel = 'User';
+                                $roleBadge = 'badge-secondary';
+                                if ($row['role'] === 'admin') {
+                                    $roleClass = 'text-admin';
+                                    $roleLabel = 'Admin';
+                                    $roleBadge = 'badge-info';
+                                } elseif ($row['role'] === 'master') {
+                                    $roleClass = 'text-admin';
+                                    $roleLabel = 'Master';
+                                    $roleBadge = 'badge-warning';
+                                }
+                            ?>
+                            <span class="badge <?php echo $roleBadge; ?>" style="display:inline-block; margin-bottom: 4px;">
+                                <?php echo htmlspecialchars($roleLabel); ?>
+                            </span>
+                            <div class="text-muted" style="font-size: 12px;">(<?php echo htmlspecialchars($row['role']); ?>)</div>
                         </td>
                         <td>
                             <?php if ($row['username'] == $_SESSION['username']) { ?>
-                                <span class="text-muted">Sedang Dipakai</span>
+                                <span class="text-muted">Akun Anda</span>
+                            <?php } elseif (!$isMaster && ($row['role'] === 'admin' || $row['role'] === 'master')) { ?>
+                                <span class="text-muted">Tidak Diizinkan</span>
                             <?php } else { ?>
                                 <a href="kelola_user.php?hapus=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus akun <?php echo $row['username']; ?>?');" style="padding: 6px 12px; font-size: 12px;">Hapus</a>
                             <?php } ?>

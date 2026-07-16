@@ -14,7 +14,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         link.addEventListener('click', () => {
             link.style.transform = 'translateY(0)';
+            if (window.innerWidth <= 768) {
+                document.querySelector('.menu')?.classList.remove('open');
+                document.querySelector('.menu-toggle')?.setAttribute('aria-expanded', 'false');
+            }
         });
+    });
+
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+
+    const closeMenu = () => {
+        document.body.classList.remove('menu-open');
+        menu?.classList.remove('open');
+        menuToggle?.classList.remove('active');
+        menuToggle?.setAttribute('aria-expanded', 'false');
+    };
+
+    if (menuToggle && menu) {
+        menuToggle.addEventListener('click', (event) => {
+            event.preventDefault();
+            const isOpen = document.body.classList.toggle('menu-open');
+            menu.classList.toggle('open', isOpen);
+            menuToggle.classList.toggle('active', isOpen);
+            menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        menu.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', closeMenu);
+        });
+    }
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            closeMenu();
+        }
     });
 
     const hero = document.querySelector('.hero');

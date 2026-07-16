@@ -56,6 +56,7 @@ include '../templates/header.php';
             <a href="../index.php?menu=koleksi" class="card text-center" style="margin-bottom: 0;">📚 Kelola Buku</a>
             <a href="lihat_buku.php" class="card text-center" style="margin-bottom: 0;">📋 Laporan Pinjam</a>
             <a href="kelola_user.php" class="card text-center" style="margin-bottom: 0;">👥 Kelola Pengguna</a>
+            <a href="lihat_pesan.php" class="card text-center" style="margin-bottom: 0;">💬 Lihat Pesan Kontak</a>
             <a href="../index.php" class="card text-center" style="margin-bottom: 0;">🏠 Halaman Publik</a>
         </div>
 

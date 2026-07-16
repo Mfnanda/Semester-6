@@ -3,13 +3,13 @@
 if (isset($_POST['kirim_pesan'])) {
     require_once __DIR__ . '/Config/koneksi.php';
     /** @var mysqli $koneksi */
-    
-    $nama = $_POST['nama'];
-    $instansi = $_POST['instansi'];
-    $pesan = $_POST['pesan'];
-    
+
+    $nama = mysqli_real_escape_string($koneksi, trim($_POST['nama']));
+    $instansi = mysqli_real_escape_string($koneksi, trim($_POST['instansi']));
+    $pesan = mysqli_real_escape_string($koneksi, trim($_POST['pesan']));
+
     $query = mysqli_query($koneksi, "INSERT INTO pesan_pengunjung (nama, instansi, pesan) VALUES ('$nama', '$instansi', '$pesan')");
-    
+
     if ($query) {
         echo "<script>alert('Terima kasih! Pesan Anda berhasil dikirim.'); window.location.href='index.php?menu=kontak';</script>";
     } else {

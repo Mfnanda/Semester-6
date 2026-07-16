@@ -18,6 +18,12 @@ require_once __DIR__ . '/Config/koneksi.php';
         </form>
     </div>
 
+    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+        <div style="display:flex; justify-content:flex-end; margin-bottom: 12px;">
+            <a href="index.php?menu=tambah_buku" class="btn btn-primary">+ Tambah Buku</a>
+        </div>
+    <?php endif; ?>
+
     <div class="grid-3">
     <?php
     $keyword = isset($_GET['cari']) ? $_GET['cari'] : '';
@@ -37,7 +43,13 @@ require_once __DIR__ . '/Config/koneksi.php';
                 <hr>
                 <p><?php echo htmlspecialchars(substr($sinopsis, 0, 160)); ?>...</p>
                 <div class="text-center" style="margin-top: 15px;">
-                    <?php if (isset($_SESSION['role'])): ?>
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                        <a href="baca_buku.php?id=<?php echo $data['id']; ?>" class="btn btn-success btn-full">📖 Baca Isi</a>
+                        <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
+                            <a href="index.php?menu=edit_buku&id=<?php echo $data['id']; ?>" class="btn btn-secondary" style="flex:1; min-width: 110px;">✏️ Edit</a>
+                            <a href="hapus_buku.php?id=<?php echo $data['id']; ?>" class="btn btn-danger" style="flex:1; min-width: 110px;" onclick="return confirm('Yakin ingin menghapus buku ini?');">🗑️ Hapus</a>
+                        </div>
+                    <?php elseif (isset($_SESSION['role'])): ?>
                         <a href="baca_buku.php?id=<?php echo $data['id']; ?>" class="btn btn-success btn-full">📖 Baca Isi</a>
                     <?php else: ?>
                         <a href="index.php?menu=login" class="btn btn-danger btn-full">🔒 Login Membaca</a>
